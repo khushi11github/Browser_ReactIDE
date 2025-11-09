@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Code2, Save, FolderOpen, Settings, Moon, Sun, LogOut, User } from 'lucide-react';
+import { Code2, Save, FolderOpen, Settings, Moon, Sun, LogOut, User, Download, Share2, ExternalLink } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useProject } from '../context/ProjectContext';
+import { exportToCodeSandbox, exportToStackBlitz } from '../utils/export';
+import ShareModal from './ShareModal';
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
-  const { currentProject, saveProject, autoSave, setAutoSave } = useProject();
+  const { currentProject, saveProject, autoSave, setAutoSave, files } = useProject();
   const [showSettings, setShowSettings] = useState(false);
+  const [showExportMenu, setShowExportMenu] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
   
   const user = JSON.parse(localStorage.getItem('codecanvas-user') || 'null');
 
@@ -27,6 +31,16 @@ export default function Navbar() {
     window.location.href = '/';
   };
 
+  const handleExportCodeSandbox = () => {
+    exportToCodeSandbox(files);
+    setShowExportMenu(false);
+  };
+
+  const handleExportStackBlitz = () => {
+    exportToStackBlitz(files);
+    setShowExportMenu(false);
+  };
+
   return (
     <nav className="h-14 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-4">
       <div className="flex items-center gap-4">
@@ -43,6 +57,51 @@ export default function Navbar() {
       </div>
 
       <div className="flex items-center gap-2">
+        <button
+          onClick={() => setShowShareModal(true)}
+          className="flex items-center gap-2 px-3 py-1.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 text-sm transition"
+          title="Share project"
+        >
+          <Share2 className="w-4 h-4" />
+          <span className="hidden sm:inline">Share</span>
+        </button>
+
+        <div className="relative">
+          <button
+            onClick={() => setShowExportMenu(!showExportMenu)}
+            className="flex items-center gap-2 px-3 py-1.5 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm transition"
+            title="Export project"
+          >
+            <Download className="w-4 h-4" />
+            <span className="hidden sm:inline">Export</span>
+          </button>
+
+          {showExportMenu && (
+            <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl z-50">
+              <button
+                onClick={handleExportCodeSandbox}
+                className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-left text-sm text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700"
+              >
+                <ExternalLink className="w-4 h-4 text-orange-500" />
+                <div>
+                  <div className="font-medium">CodeSandbox</div>
+                  <div className="text-xs text-gray-500">Open in CodeSandbox</div>
+                </div>
+              </button>
+              <button
+                onClick={handleExportStackBlitz}
+                className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-left text-sm text-gray-700 dark:text-gray-300"
+              >
+                <ExternalLink className="w-4 h-4 text-blue-500" />
+                <div>
+                  <div className="font-medium">StackBlitz</div>
+                  <div className="text-xs text-gray-500">Open in StackBlitz</div>
+                </div>
+              </button>
+            </div>
+          )}
+        </div>
+
         <button
           id="save-btn"
           onClick={handleSave}
@@ -105,6 +164,8 @@ export default function Navbar() {
           )}
         </div>
       </div>
+
+      <ShareModal isOpen={showShareModal} onClose={() => setShowShareModal(false)} />
     </nav>
   );
 }

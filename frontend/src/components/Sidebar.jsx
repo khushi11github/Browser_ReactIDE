@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { File, Folder, Plus, Trash2, Edit2, Check, X } from 'lucide-react';
+import { File, Folder, Plus, Trash2, Edit2, Check, X, Sparkles } from 'lucide-react';
 import { useProject } from '../context/ProjectContext';
+import TemplatesModal from './TemplatesModal';
 
 export default function Sidebar() {
   const { files, activeFile, setActiveFile, createFile, deleteFile, renameFile } = useProject();
@@ -8,6 +9,7 @@ export default function Sidebar() {
   const [newFileName, setNewFileName] = useState('');
   const [editingFile, setEditingFile] = useState(null);
   const [editName, setEditName] = useState('');
+  const [showTemplates, setShowTemplates] = useState(false);
 
   const handleCreateFile = () => {
     if (newFileName.trim()) {
@@ -45,16 +47,27 @@ export default function Sidebar() {
 
   return (
     <div className="w-64 bg-gray-50 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 flex flex-col">
-      <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
-        <h2 className="font-semibold text-gray-900 dark:text-white">Files</h2>
+      <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="font-semibold text-gray-900 dark:text-white">Files</h2>
+          <button
+            onClick={() => setShowNewFile(true)}
+            className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
+            title="Create new file"
+          >
+            <Plus className="w-4 h-4" />
+          </button>
+        </div>
         <button
-          onClick={() => setShowNewFile(true)}
-          className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
-          title="Create new file"
+          onClick={() => setShowTemplates(true)}
+          className="w-full flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition text-sm"
         >
-          <Plus className="w-4 h-4" />
+          <Sparkles className="w-4 h-4" />
+          Use Template
         </button>
       </div>
+
+      <TemplatesModal isOpen={showTemplates} onClose={() => setShowTemplates(false)} />
 
       <div className="flex-1 overflow-y-auto">
         {showNewFile && (
