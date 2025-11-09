@@ -8,6 +8,13 @@ A powerful, full-featured browser-based IDE for creating and running React appli
 
 ## ✨ Features
 
+### 🌟 Unique Features (What Makes CodeCanvas Stand Out)
+- **📦 Template Library**: Quick-start with pre-built React templates (Todo App, Counter, Card Components, and more)
+- **🚀 One-Click Export**: Export your project to CodeSandbox or StackBlitz instantly
+- **🔗 Share Projects**: Generate shareable URLs with your code embedded - perfect for collaboration
+- **📋 Code Snippets**: Reusable patterns for common React components
+- **⚡ Instant Setup**: No installation, configuration, or build tools required
+
 ### Core Features
 - **📁 File Management**: Create, delete, rename, and organize project files with an intuitive file tree
 - **💻 Code Editor**: Monaco Editor integration with syntax highlighting, IntelliSense, and auto-completion
@@ -114,6 +121,16 @@ The backend API will run on `http://localhost:5000`
 
 ## 📖 Usage
 
+### Quick Start with Templates 🌟
+1. Navigate to the IDE page
+2. Click the **"Use Template"** button in the sidebar
+3. Choose from pre-built templates:
+   - **Basic App**: Simple React starter
+   - **Todo List**: Complete todo app with state management
+   - **Counter**: Counter app with increment/decrement
+   - **Card Component**: Modern card component example
+4. Start customizing immediately!
+
 ### Creating a New Project
 1. Navigate to the IDE page
 2. Start coding in the default files (App.js, index.js, styles.css)
@@ -124,6 +141,19 @@ The backend API will run on `http://localhost:5000`
 - **Delete File**: Hover over a file and click the trash icon
 - **Rename File**: Hover over a file and click the edit icon
 - **Switch Files**: Click on any file in the sidebar
+
+### Sharing Your Project 🌟
+1. Click the **"Share"** button (purple) in the navbar
+2. Click **"Generate Share Link"**
+3. Copy the generated URL
+4. Share with anyone - they can view and fork your code!
+
+### Exporting Your Project 🌟
+1. Click the **"Export"** button (green) in the navbar
+2. Choose your platform:
+   - **CodeSandbox**: Opens in CodeSandbox editor
+   - **StackBlitz**: Opens in StackBlitz editor
+3. Continue development on your preferred platform!
 
 ### Saving Projects
 - **Auto-save**: Enabled by default, saves every 2 seconds
@@ -193,6 +223,16 @@ This project demonstrates:
 - ✅ Responsive UI/UX design
 - ✅ localStorage persistence
 - ✅ Real-time code preview
+
+### 🌟 Unique Value Proposition
+
+**What makes CodeCanvas different from other browser IDEs:**
+
+1. **Template Library**: Get started instantly with production-ready templates
+2. **Export Freedom**: Not locked into our platform - export to CodeSandbox or StackBlitz anytime
+3. **True Sharing**: Share projects via URL without requiring recipient registration
+4. **Zero Setup**: No account creation, downloads, or configuration needed to start coding
+5. **Professional Tools**: Monaco Editor + Sandpack = CodeSandbox-quality experience
 
 ## 🚀 Deployment
 
