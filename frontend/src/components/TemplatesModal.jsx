@@ -5,12 +5,29 @@ import { useProject } from '../context/ProjectContext';
 
 export default function TemplatesModal({ isOpen, onClose }) {
   const templates = getTemplateList();
-  const { setFiles, setActiveFile } = useProject();
+  const { updateFile, setActiveFile, deleteFile, files } = useProject();
+
+  console.log('TemplatesModal render - isOpen:', isOpen);
 
   const handleSelectTemplate = (templateId) => {
+    console.log('Template selected:', templateId);
     const template = getTemplate(templateId);
-    setFiles(template.files);
+    console.log('Template data:', template);
+    console.log('Template files:', template.files);
+    
+    // Delete all existing files first
+    Object.keys(files).forEach(filePath => {
+      deleteFile(filePath);
+    });
+    
+    // Add all template files
+    Object.entries(template.files).forEach(([path, fileData]) => {
+      updateFile(path, fileData.code);
+    });
+    
+    // Set the first file as active
     setActiveFile(Object.keys(template.files)[0]);
+    console.log('Template applied, closing modal');
     onClose();
   };
 

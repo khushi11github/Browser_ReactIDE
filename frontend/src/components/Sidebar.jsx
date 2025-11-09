@@ -59,7 +59,10 @@ export default function Sidebar() {
           </button>
         </div>
         <button
-          onClick={() => setShowTemplates(true)}
+          onClick={() => {
+            console.log('Use Template button clicked');
+            setShowTemplates(true);
+          }}
           className="w-full flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition text-sm"
         >
           <Sparkles className="w-4 h-4" />
