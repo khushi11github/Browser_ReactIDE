@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: cipherstudio-backend
+    name: codecanvas-backend
     env: node
     region: oregon
     plan: free
@@ -15,3 +15,4 @@ services:
         generateValue: true
       - key: PORT
         value: 5000
+

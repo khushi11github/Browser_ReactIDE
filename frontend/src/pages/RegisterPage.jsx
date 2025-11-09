@@ -30,8 +30,8 @@ export default function RegisterPage() {
 
     try {
       const response = await axios.post('/api/auth/register', { username, email, password });
-      localStorage.setItem('cipherstudio-token', response.data.token);
-      localStorage.setItem('cipherstudio-user', JSON.stringify(response.data.user));
+      localStorage.setItem('codecanvas-token', response.data.token);
+      localStorage.setItem('codecanvas-user', JSON.stringify(response.data.user));
       navigate('/ide');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
@@ -46,7 +46,7 @@ export default function RegisterPage() {
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-4">
             <Code2 className="w-10 h-10 text-blue-600" />
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">CipherStudio</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">CodeCanvas</h1>
           </Link>
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Create Account</h2>
           <p className="text-gray-600 dark:text-gray-400 mt-2">Join and start coding</p>

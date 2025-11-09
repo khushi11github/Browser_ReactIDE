@@ -24,13 +24,13 @@ git init
 git add .
 
 # Commit
-git commit -m "Initial commit - CipherStudio IDE"
+git commit -m "Initial commit - CodeCanvas IDE"
 
 # Create main branch
 git branch -M main
 
 # Add remote (replace with your GitHub username/repo)
-git remote add origin https://github.com/YOUR_USERNAME/cipherstudio.git
+git remote add origin https://github.com/YOUR_USERNAME/CodeCanvas.git
 
 # Push to GitHub
 git push -u origin main
@@ -66,7 +66,7 @@ vercel --prod
 
 # Follow prompts:
 # - Link to existing project or create new? [Create new]
-# - Project name? [cipherstudio-frontend]
+# - Project name? [CodeCanvas-frontend]
 # - Directory? [./]
 ```
 
@@ -84,7 +84,7 @@ vercel --prod
 ### Create Database User
 1. Security → Database Access
 2. Add New Database User
-3. Username: `cipherstudio_user`
+3. Username: `CodeCanvas_user`
 4. Password: Auto-generate (copy it!)
 5. Built-in Role: **Read and write to any database**
 6. Add User
@@ -100,12 +100,12 @@ vercel --prod
 2. "Connect your application"
 3. Copy connection string:
    ```
-   mongodb+srv://cipherstudio_user:<password>@cluster0.xxxxx.mongodb.net/
+   mongodb+srv://CodeCanvas_user:<password>@cluster0.xxxxx.mongodb.net/
    ```
 4. Replace `<password>` with your actual password
 5. Add database name at the end:
    ```
-   mongodb+srv://cipherstudio_user:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/cipherstudio?retryWrites=true&w=majority
+   mongodb+srv://CodeCanvas_user:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/CodeCanvas?retryWrites=true&w=majority
    ```
 
 ## 4. Deploy Backend to Render
@@ -115,7 +115,7 @@ vercel --prod
 3. Dashboard → New → Web Service
 4. Connect your repository
 5. Settings:
-   - **Name**: `cipherstudio-backend`
+   - **Name**: `CodeCanvas-backend`
    - **Root Directory**: `backend`
    - **Environment**: `Node`
    - **Build Command**: `npm install`
@@ -125,7 +125,7 @@ vercel --prod
 6. Environment Variables (click "Add Environment Variable"):
    ```
    NODE_ENV = production
-   MONGODB_URI = mongodb+srv://cipherstudio_user:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/cipherstudio
+   MONGODB_URI = mongodb+srv://CodeCanvas_user:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/CodeCanvas
    JWT_SECRET = your_super_secret_jwt_key_change_this_to_random_string
    PORT = 5000
    ```
@@ -133,7 +133,7 @@ vercel --prod
 7. Click "Create Web Service"
 8. Wait for deployment (5-10 minutes)
 
-**Your backend URL**: `https://cipherstudio-backend.onrender.com`
+**Your backend URL**: `https://CodeCanvas-backend.onrender.com`
 
 ## 5. Connect Frontend to Backend
 
@@ -142,7 +142,7 @@ vercel --prod
 2. Settings → Environment Variables
 3. Add variable:
    - **Name**: `VITE_API_URL`
-   - **Value**: `https://cipherstudio-backend.onrender.com`
+   - **Value**: `https://CodeCanvas-backend.onrender.com`
    - **Environment**: All (Production, Preview, Development)
 4. Save
 
@@ -181,8 +181,8 @@ Test these features:
 ### Frontend can't reach backend
 ```powershell
 # Check if backend is running
-# Open in browser: https://cipherstudio-backend.onrender.com/api/health
-# Should return: {"status":"ok","message":"CipherStudio API is running"}
+# Open in browser: https://CodeCanvas-backend.onrender.com/api/health
+# Should return: {"status":"ok","message":"CodeCanvas API is running"}
 ```
 
 ### CORS Error
@@ -231,7 +231,7 @@ npm run dev
 
 After completing these steps, you'll have:
 - **Frontend**: https://your-project.vercel.app
-- **Backend**: https://cipherstudio-backend.onrender.com
+- **Backend**: https://CodeCanvas-backend.onrender.com
 - **Database**: MongoDB Atlas (cloud)
 
 Share your deployed URL in the submission form!
@@ -243,3 +243,4 @@ Share your deployed URL in the submission form!
 - [ ] Test all core features
 - [ ] Add README.md to repo
 - [ ] Submit via Google Form
+

@@ -16,7 +16,7 @@ const DEFAULT_FILES = {
     code: `export default function App() {
   return (
     <div className="app">
-      <h1>Hello CipherStudio!</h1>
+      <h1>Hello CodeCanvas!</h1>
       <p>Start building your React app here.</p>
     </div>
   );
@@ -55,7 +55,7 @@ export const ProjectProvider = ({ children }) => {
 
   // Load project from localStorage on mount
   useEffect(() => {
-    const savedProjectId = localStorage.getItem('cipherstudio-current-project');
+    const savedProjectId = localStorage.getItem('codecanvas-current-project');
     if (savedProjectId) {
       loadProject(savedProjectId);
     }
@@ -84,20 +84,20 @@ export const ProjectProvider = ({ children }) => {
     setCurrentProject(newProject);
     setFiles(DEFAULT_FILES);
     setActiveFile('/App.js');
-    localStorage.setItem('cipherstudio-current-project', projectId);
-    localStorage.setItem(`cipherstudio-project-${projectId}`, JSON.stringify(newProject));
+    localStorage.setItem('codecanvas-current-project', projectId);
+    localStorage.setItem(`codecanvas-project-${projectId}`, JSON.stringify(newProject));
     
     return projectId;
   }, []);
 
   const loadProject = useCallback((projectId) => {
-    const saved = localStorage.getItem(`cipherstudio-project-${projectId}`);
+    const saved = localStorage.getItem(`codecanvas-project-${projectId}`);
     if (saved) {
       const project = JSON.parse(saved);
       setCurrentProject(project);
       setFiles(project.files || DEFAULT_FILES);
       setActiveFile(Object.keys(project.files || DEFAULT_FILES)[0]);
-      localStorage.setItem('cipherstudio-current-project', projectId);
+      localStorage.setItem('codecanvas-current-project', projectId);
     }
   }, []);
 
@@ -108,7 +108,7 @@ export const ProjectProvider = ({ children }) => {
         files,
         updatedAt: new Date().toISOString(),
       };
-      localStorage.setItem(`cipherstudio-project-${currentProject.projectId}`, JSON.stringify(updated));
+      localStorage.setItem(`codecanvas-project-${currentProject.projectId}`, JSON.stringify(updated));
       setCurrentProject(updated);
     }
   }, [currentProject, files]);

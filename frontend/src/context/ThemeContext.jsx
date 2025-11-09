@@ -12,12 +12,12 @@ export const useTheme = () => {
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem('cipherstudio-theme');
+    const saved = localStorage.getItem('codecanvas-theme');
     return saved || 'dark';
   });
 
   useEffect(() => {
-    localStorage.setItem('cipherstudio-theme', theme);
+    localStorage.setItem('codecanvas-theme', theme);
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {

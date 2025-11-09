@@ -8,7 +8,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Code2 className="w-8 h-8 text-blue-600" />
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">CipherStudio</h1>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">CodeCanvas</h1>
           </div>
           <div className="flex gap-4">
             <Link 
@@ -103,7 +103,7 @@ export default function HomePage() {
 
       <footer className="border-t border-gray-200 dark:border-gray-700 py-8 mt-20">
         <div className="max-w-7xl mx-auto px-6 text-center text-gray-600 dark:text-gray-400">
-          <p>© 2025 CipherStudio. Built with React, Sandpack, and MongoDB.</p>
+          <p>© 2025 CodeCanvas. Built with React, Sandpack, and MongoDB.</p>
         </div>
       </footer>
     </div>

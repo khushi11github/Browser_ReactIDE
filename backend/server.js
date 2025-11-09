@@ -21,7 +21,7 @@ app.use('/api/auth', authRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'CipherStudio API is running' });
+  res.json({ status: 'ok', message: 'CodeCanvas API is running' });
 });
 
 // MongoDB Connection

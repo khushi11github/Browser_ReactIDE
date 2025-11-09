@@ -1,8 +1,8 @@
-# 🚀 CipherStudio - Browser-Based React IDE
+# 🚀 CodeCanvas - Browser-Based React IDE
 
 A powerful, full-featured browser-based IDE for creating and running React applications instantly. Built with React, Vite, Sandpack, MongoDB, and Express.js.
 
-![CipherStudio](https://img.shields.io/badge/React-18.2.0-blue)
+![CodeCanvas](https://img.shields.io/badge/React-18.2.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-active-success)
 
@@ -25,7 +25,7 @@ A powerful, full-featured browser-based IDE for creating and running React appli
 ## 🏗️ Architecture
 
 ```
-CipherStudio/
+CodeCanvas/
 ├── frontend/               # React + Vite frontend
 │   ├── src/
 │   │   ├── components/     # React components
@@ -84,7 +84,7 @@ cp .env.example .env
 2. Update `.env` with your MongoDB connection string:
 ```env
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/cipherstudio
+MONGODB_URI=mongodb://localhost:27017/codecanvas
 JWT_SECRET=your_secret_key_here
 NODE_ENV=development
 ```
@@ -229,8 +229,8 @@ Built as part of the CipherSchool assessment project.
 2. **MongoDB + localStorage**: Hybrid approach for reliability and offline support
 3. **Context API**: Simpler state management for this scope
 4. **Tailwind CSS**: Rapid UI development with consistent design
-5. **Monaco Editor**: Professional-grade editing experience
+5. Monaco Editor: Professional-grade editing experience
 
 ---
 
-**Made with ❤️ for CipherSchool**
+**Made with ❤️ using CodeCanvas**

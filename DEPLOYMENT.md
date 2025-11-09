@@ -1,6 +1,6 @@
-# 🚀 CipherStudio Deployment Guide
+# 🚀 CodeCanvas Deployment Guide
 
-Complete guide to deploy CipherStudio to production.
+Complete guide to deploy CodeCanvas to production.
 
 ## 📋 Table of Contents
 1. [Prerequisites](#prerequisites)
@@ -32,9 +32,9 @@ Before deploying, ensure you have:
 cd d:\myfolders\CipherSchool
 git init
 git add .
-git commit -m "Initial commit - CipherStudio"
+git commit -m "Initial commit - CodeCanvas"
 git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/cipherstudio.git
+git remote add origin https://github.com/YOUR_USERNAME/CodeCanvas.git
 git push -u origin main
 ```
 
@@ -56,7 +56,7 @@ git push -u origin main
 6. Click **"Deploy"**
 
 **Step 3: Get Your URL**
-- After deployment, you'll get a URL like: `https://cipherstudio.vercel.app`
+- After deployment, you'll get a URL like: `https://CodeCanvas.vercel.app`
 
 ### Option 2: Deploy via Vercel CLI
 
@@ -85,7 +85,7 @@ Create `render.yaml` in the root directory (optional but recommended):
 ```yaml
 services:
   - type: web
-    name: cipherstudio-backend
+    name: CodeCanvas-backend
     env: node
     buildCommand: cd backend && npm install
     startCommand: cd backend && npm start
@@ -106,7 +106,7 @@ services:
 2. Click **"New +"** → **"Web Service"**
 3. Connect your GitHub repository
 4. Configure:
-   - **Name**: `cipherstudio-backend`
+   - **Name**: `CodeCanvas-backend`
    - **Root Directory**: `backend`
    - **Environment**: `Node`
    - **Build Command**: `npm install`
@@ -116,7 +116,7 @@ services:
 5. Add Environment Variables:
    ```
    NODE_ENV = production
-   MONGODB_URI = mongodb+srv://username:password@cluster.mongodb.net/cipherstudio
+   MONGODB_URI = mongodb+srv://username:password@cluster.mongodb.net/CodeCanvas
    JWT_SECRET = your_super_secret_jwt_key_here_change_this
    PORT = 5000
    ```
@@ -124,7 +124,7 @@ services:
 6. Click **"Create Web Service"**
 
 ### Step 3: Get Your Backend URL
-- After deployment: `https://cipherstudio-backend.onrender.com`
+- After deployment: `https://CodeCanvas-backend.onrender.com`
 
 ---
 
@@ -143,7 +143,7 @@ services:
 1. Go to **Database Access**
 2. Click **"Add New Database User"**
 3. Choose **Password** authentication
-4. Username: `cipherstudio`
+4. Username: `CodeCanvas`
 5. Password: Generate a secure password (save it!)
 6. Database User Privileges: **Read and write to any database**
 7. Click **"Add User"**
@@ -162,16 +162,16 @@ services:
 2. Choose **"Connect your application"**
 3. Copy the connection string:
    ```
-   mongodb+srv://cipherstudio:<password>@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority
+   mongodb+srv://CodeCanvas:<password>@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority
    ```
 4. Replace `<password>` with your actual password
-5. Add database name: `...mongodb.net/cipherstudio?retryWrites=true...`
+5. Add database name: `...mongodb.net/CodeCanvas?retryWrites=true...`
 
 ### Step 5: Test Connection
 
 Update your backend `.env` (local test):
 ```env
-MONGODB_URI=mongodb+srv://cipherstudio:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/cipherstudio?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://CodeCanvas:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/CodeCanvas?retryWrites=true&w=majority
 ```
 
 Then add this to Render's environment variables.
@@ -187,7 +187,7 @@ After deploying backend, update frontend:
 2. Navigate to **Environment Variables**
 3. Add/Update:
    ```
-   VITE_API_URL = https://cipherstudio-backend.onrender.com
+   VITE_API_URL = https://CodeCanvas-backend.onrender.com
    ```
 4. Redeploy
 
@@ -241,7 +241,7 @@ heroku login
 
 # Create app
 cd backend
-heroku create cipherstudio-backend
+heroku create CodeCanvas-backend
 
 # Set environment variables
 heroku config:set MONGODB_URI="your_mongodb_uri"
@@ -302,7 +302,7 @@ In `backend/server.js`, update CORS:
 ```javascript
 app.use(cors({
   origin: [
-    'https://cipherstudio.vercel.app',
+    'https://CodeCanvas.vercel.app',
     'http://localhost:3000'
   ],
   credentials: true
@@ -367,7 +367,7 @@ app.use(cors({
 ### Render Logs
 ```bash
 # View logs
-render logs cipherstudio-backend
+render logs CodeCanvas-backend
 ```
 
 ### MongoDB Atlas Monitoring
@@ -380,8 +380,8 @@ render logs cipherstudio-backend
 
 After following this guide, you'll have:
 
-- **Frontend**: `https://cipherstudio.vercel.app`
-- **Backend API**: `https://cipherstudio-backend.onrender.com`
+- **Frontend**: `https://CodeCanvas.vercel.app`
+- **Backend API**: `https://CodeCanvas-backend.onrender.com`
 - **Database**: MongoDB Atlas (cloud)
 
 ---
@@ -391,7 +391,7 @@ After following this guide, you'll have:
 ```powershell
 # 1. Push to GitHub
 git add .
-git commit -m "Deploy CipherStudio"
+git commit -m "Deploy CodeCanvas"
 git push origin main
 
 # 2. Deploy frontend to Vercel
@@ -428,4 +428,5 @@ git push origin main
 
 ---
 
-**Congratulations!** 🎊 Your CipherStudio IDE is now live and accessible worldwide!
+**Congratulations!** 🎊 Your CodeCanvas IDE is now live and accessible worldwide!
+

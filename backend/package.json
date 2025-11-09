@@ -1,8 +1,8 @@
 {
-  "name": "cipherstudio-backend",
+  "name": "codecanvas-backend",
   "version": "1.0.0",
   "type": "module",
-  "description": "Backend API for CipherStudio IDE",
+  "description": "Backend API for CodeCanvas IDE",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

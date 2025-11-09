@@ -1,4 +1,4 @@
-# 🚀 CipherStudio Setup Guide
+# 🚀 CodeCanvas Setup Guide
 
 ## Quick Start (Development)
 
@@ -27,7 +27,7 @@ cp .env.example .env
 Edit `.env` and update MongoDB URI (use local or Atlas):
 ```
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/cipherstudio
+MONGODB_URI=mongodb://localhost:27017/CodeCanvas
 JWT_SECRET=your_secret_key_here_change_in_production
 NODE_ENV=development
 ```
@@ -151,3 +151,4 @@ npm run dev
 ---
 
 **Need Help?** Check the main README.md for more details.
+

@@ -9,7 +9,7 @@ export default function Navbar() {
   const { currentProject, saveProject, autoSave, setAutoSave } = useProject();
   const [showSettings, setShowSettings] = useState(false);
   
-  const user = JSON.parse(localStorage.getItem('cipherstudio-user') || 'null');
+  const user = JSON.parse(localStorage.getItem('codecanvas-user') || 'null');
 
   const handleSave = () => {
     saveProject();
@@ -22,8 +22,8 @@ export default function Navbar() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('cipherstudio-token');
-    localStorage.removeItem('cipherstudio-user');
+    localStorage.removeItem('codecanvas-token');
+    localStorage.removeItem('codecanvas-user');
     window.location.href = '/';
   };
 
@@ -32,7 +32,7 @@ export default function Navbar() {
       <div className="flex items-center gap-4">
         <Link to="/" className="flex items-center gap-2">
           <Code2 className="w-6 h-6 text-blue-600" />
-          <span className="font-bold text-gray-900 dark:text-white hidden sm:block">CipherStudio</span>
+          <span className="font-bold text-gray-900 dark:text-white hidden sm:block">CodeCanvas</span>
         </Link>
         
         {currentProject && (

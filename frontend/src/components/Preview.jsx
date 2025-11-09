@@ -30,7 +30,7 @@ root.render(
     sandpackFiles['/App.js'] = `export default function App() {
   return (
     <div className="app">
-      <h1>Hello CipherStudio!</h1>
+      <h1>Hello CodeCanvas!</h1>
       <p>Start building your React app here.</p>
     </div>
   );

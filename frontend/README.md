@@ -1,6 +1,6 @@
-# CipherStudio Frontend
+# CodeCanvas Frontend
 
-React-based frontend for CipherStudio IDE.
+React-based frontend for CodeCanvas IDE.
 
 ## Setup
 

@@ -1,6 +1,6 @@
-# CipherStudio Backend
+# CodeCanvas Backend
 
-Express.js + MongoDB backend API for CipherStudio.
+Express.js + MongoDB backend API for CodeCanvas.
 
 ## Setup
 
