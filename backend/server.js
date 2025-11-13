@@ -51,7 +51,19 @@ app.use('/api/auth', authRoutes);
 
 // MongoDB Connection (don't exit process on failure; allow graceful degradation)
 const connectDB = async () => {
-  const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/cipherstudio';
+  // Only try to connect when a MONGODB_URI is explicitly provided or when
+  // running in development (local). This prevents attempts to connect to
+  // localhost on hosting platforms (which causes ECONNREFUSED errors).
+  const envUri = process.env.MONGODB_URI;
+  const localFallback = process.env.NODE_ENV !== 'production';
+  const uri = envUri ? envUri : (localFallback ? 'mongodb://localhost:27017/codecanvas' : null);
+
+  if (!uri) {
+    dbConnected = false;
+    console.log('⚠️  No MONGODB_URI provided and running in production — skipping DB connection.');
+    return;
+  }
+
   try {
     // Connect without passing unsupported options to avoid MongoParseError
     await mongoose.connect(uri);
