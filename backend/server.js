@@ -53,7 +53,8 @@ app.use('/api/auth', authRoutes);
 const connectDB = async () => {
   const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/cipherstudio';
   try {
-    await mongoose.connect(uri, { keepAlive: true });
+    // Connect without passing unsupported options to avoid MongoParseError
+    await mongoose.connect(uri);
     dbConnected = true;
     console.log('✅ MongoDB connected successfully');
   } catch (error) {
