@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Code2, LogIn } from 'lucide-react';
-import axios from 'axios';
+import api from '../utils/api';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -16,7 +16,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const response = await axios.post('/api/auth/login', { email, password });
+      const response = await api.post('/api/auth/login', { email, password });
       localStorage.setItem('codecanvas-token', response.data.token);
       localStorage.setItem('codecanvas-user', JSON.stringify(response.data.user));
       navigate('/ide');
