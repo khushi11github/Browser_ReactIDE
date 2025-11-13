@@ -21,6 +21,16 @@ app.use(cors({
     // allow requests with no origin (e.g., mobile apps, curl)
     if (!origin) return callback(null, true);
     if (allowedOrigins.indexOf(origin) !== -1) return callback(null, true);
+    // Allow Vercel preview and other vercel.app subdomains without listing each one.
+    // This accepts origins like <project>-<hash>.vercel.app
+    try {
+      const parsed = new URL(origin);
+      const host = parsed.hostname.toLowerCase();
+      if (host.endsWith('.vercel.app')) return callback(null, true);
+    } catch (e) {
+      // ignore parse errors and fall through to deny
+    }
+
     return callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
