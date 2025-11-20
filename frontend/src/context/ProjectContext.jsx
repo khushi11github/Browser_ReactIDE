@@ -11,6 +11,7 @@ export const useProject = () => {
   return context;
 };
 
+
 const DEFAULT_FILES = {
   '/App.js': {
     code: `export default function App() {
@@ -52,6 +53,7 @@ export const ProjectProvider = ({ children }) => {
   const [files, setFiles] = useState(DEFAULT_FILES);
   const [activeFile, setActiveFile] = useState('/App.js');
   const [autoSave, setAutoSave] = useState(true);
+  const [snapshots, setSnapshots] = useState([]);
 
   // Load project from localStorage on mount
   useEffect(() => {
@@ -151,6 +153,50 @@ export const ProjectProvider = ({ children }) => {
     }
   }, [activeFile]);
 
+  const addMultipleFiles = useCallback((newFiles) => {
+    setFiles(prev => ({
+      ...prev,
+      ...newFiles,
+    }));
+  }, []);
+
+  const createSnapshot = useCallback(() => {
+    const snapshot = {
+      id: Date.now().toString(),
+      name: `Snapshot ${snapshots.length + 1}`,
+      timestamp: new Date().toISOString(),
+      files: { ...files },
+    };
+    setSnapshots(prev => [...prev, snapshot]);
+    
+    // Save snapshots to localStorage
+    if (currentProject) {
+      const snapshotsKey = `codecanvas-snapshots-${currentProject.projectId}`;
+      localStorage.setItem(snapshotsKey, JSON.stringify([...snapshots, snapshot]));
+    }
+  }, [files, snapshots, currentProject]);
+
+  const loadSnapshot = useCallback((snapshotId) => {
+    const snapshot = snapshots.find(s => s.id === snapshotId);
+    if (snapshot) {
+      setFiles(snapshot.files);
+      setActiveFile(Object.keys(snapshot.files)[0] || '/App.js');
+    }
+  }, [snapshots]);
+
+  // Load snapshots when project is loaded
+  useEffect(() => {
+    if (currentProject) {
+      const snapshotsKey = `codecanvas-snapshots-${currentProject.projectId}`;
+      const savedSnapshots = localStorage.getItem(snapshotsKey);
+      if (savedSnapshots) {
+        setSnapshots(JSON.parse(savedSnapshots));
+      } else {
+        setSnapshots([]);
+      }
+    }
+  }, [currentProject]);
+
   return (
     <ProjectContext.Provider
       value={{
@@ -158,8 +204,10 @@ export const ProjectProvider = ({ children }) => {
         files,
         activeFile,
         autoSave,
+        snapshots,
         setActiveFile,
         setAutoSave,
+        setFiles,
         createNewProject,
         loadProject,
         saveProject,
@@ -167,6 +215,9 @@ export const ProjectProvider = ({ children }) => {
         createFile,
         deleteFile,
         renameFile,
+        addMultipleFiles,
+        createSnapshot,
+        loadSnapshot,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { useProject } from '../context/ProjectContext';
 import { loadFromShareLink } from '../utils/export';
@@ -32,9 +32,11 @@ export default function IDEPage() {
       <Navbar />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar />
-        <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
-          <Editor />
-          <Preview />
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+            <Editor />
+            <Preview />
+          </div>
         </div>
       </div>
     </div>

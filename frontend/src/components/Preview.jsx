@@ -6,14 +6,55 @@ export default function Preview() {
   const { files } = useProject();
   const { theme } = useTheme();
 
-  // Convert files to Sandpack format
+  // Convert files to Sandpack format and filter out non-supported files
   const sandpackFiles = Object.entries(files).reduce((acc, [path, file]) => {
-    acc[path] = file.code;
+    // Only include supported file types, skip babel config and other non-JS/CSS/HTML files
+    const ext = path.toLowerCase();
+    if (ext.includes('.babelrc') || ext.includes('babel.config') || 
+        ext.includes('.npmrc') || ext.includes('package-lock') ||
+        ext.includes('.gitignore') || ext.includes('.env')) {
+      return acc;
+    }
+    
+    // Include JS, JSX, CSS, HTML, JSON files
+    if (ext.match(/\.(jsx?|tsx?|css|html|json)$/i)) {
+      acc[path] = file.code;
+    }
     return acc;
   }, {});
 
+  // Detect if project uses React Router
+  const hasRouter = Object.values(sandpackFiles).some(code => 
+    typeof code === 'string' && (
+      code.includes('react-router') || 
+      code.includes('BrowserRouter') || 
+      code.includes('Routes') ||
+      code.includes('Route')
+    )
+  );
+
+  // Detect entry point - check for main.js, main.jsx, or index.js
+  const hasMainJs = sandpackFiles['/main.js'] || sandpackFiles['/main.jsx'];
+  const hasIndexJs = sandpackFiles['/index.js'] || sandpackFiles['/index.jsx'];
+  
+  // If main.js exists but no index.js, create index.js that imports from main
+  if (hasMainJs && !hasIndexJs) {
+    const mainPath = sandpackFiles['/main.js'] ? '/main.js' : '/main.jsx';
+    sandpackFiles['/index.js'] = `import './index.css';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+
+const root = createRoot(document.getElementById("root"));
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);`;
+  }
+
   // Ensure essential files exist
-  if (!sandpackFiles['/index.js']) {
+  if (!sandpackFiles['/index.js'] && !sandpackFiles['/index.jsx']) {
     sandpackFiles['/index.js'] = `import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
@@ -43,6 +84,11 @@ root.render(
         <span className="text-sm text-gray-700 dark:text-gray-300 font-semibold">
           Preview
         </span>
+        {hasRouter && (
+          <span className="ml-3 text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded">
+            Router Detected
+          </span>
+        )}
       </div>
       <div className="h-[calc(100%-2.5rem)]">
         <Sandpack
@@ -65,7 +111,9 @@ root.render(
             dependencies: {
               react: '^18.2.0',
               'react-dom': '^18.2.0',
+              ...(hasRouter && { 'react-router-dom': '^6.20.0' }),
             },
+            environment: 'create-react-app',
           }}
         />
       </div>

@@ -41,6 +41,8 @@ export default function TemplatesModal({ isOpen, onClose }) {
         return '⚡';
       case 'card-component':
         return '🎴';
+      case 'router-app':
+        return '🔗';
       default:
         return '📄';
     }
